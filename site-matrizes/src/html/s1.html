@@ -1,0 +1,51 @@
+<section class="panel" id="secao-1" role="tabpanel" aria-labelledby="tab-1" tabindex="-1">
+<div class="wrap"><article class="sheet">
+  <h2>Pixels, matrizes e a transposta</h2>
+  <p>Uma imagem digital é feita de quadradinhos chamados <b>pixels</b>. Numa imagem só de preto e branco, cada pixel é <span class="chip chip0">0</span> (preto) ou <span class="chip chip1">1</span> (branco). Se você escrever esses números em linhas e colunas, a imagem vira uma <b>matriz</b>.</p>
+  <div class="key">
+    <p><b>Matriz m × n</b> é uma tabela com <b>m linhas</b> e <b>n colunas</b>. O número que fica na linha <i>i</i> e na coluna <i>j</i> se chama <i>a</i><sub><i>ij</i></sub>. Na imagem, é o pixel dessa posição.</p>
+  </div>
+
+  <section class="part" aria-labelledby="s1-h1">
+    <h3 id="s1-h1">A imagem e a matriz são a mesma coisa</h3>
+    <p>Passe o mouse sobre um pixel e veja o número dele na matriz. <b>Clique ou arraste</b> para trocar entre preto e branco. Com o teclado, use as setas para andar, e a barra de espaço (ou as teclas 0 e 1) para mudar o valor. Errou? Use o botão para voltar à imagem original.</p>
+    <div id="s1-lab"></div>
+  </section>
+
+  <section class="part" aria-labelledby="s1-h2">
+    <h3 id="s1-h2">A transposta: trocar linhas por colunas</h3>
+    <p>A <b>transposta</b> de uma matriz <i>A</i> se escreve <i>A</i><sup>T</sup>. Nela, <b>cada linha de <i>A</i> vira uma coluna</b>: a linha 1 vira a coluna 1, a linha 2 vira a coluna 2, e assim por diante. O elemento que estava na linha <i>i</i> e coluna <i>j</i> passa para a linha <i>j</i> e coluna <i>i</i>:</p>
+    <p class="formula"><i>a</i><sub><i>ij</i></sub> de <i>A</i> &nbsp;=&nbsp; <i>a</i><sub><i>ji</i></sub> de <i>A</i><sup>T</sup></p>
+    <h4>Primeiro, com números quaisquer</h4>
+    <div class="lab"><div id="s1-num"></div>
+    <p class="statline">Uma matriz 2 × 3 vira uma matriz 3 × 2. Passe o mouse num número para ver para onde ele vai.</p></div>
+    <h4>Agora, com a sua imagem</h4>
+    <p>Aqui está a imagem que você editou lá em cima e a transposta dela. Use os botões das linhas para acender a linha <i>i</i> de <i>A</i> e a coluna <i>i</i> de <i>A</i><sup>T</sup>. Você também pode continuar editando <i>A</i>.</p>
+    <div id="s1-transp"></div>
+    <div class="note">
+      <p>Repare que os pixels da <b>diagonal</b> (do canto de cima à esquerda até o canto de baixo à direita) ficam onde estavam. A transposta é um <b>espelho em relação à diagonal</b>. Por isso ela não é igual a girar a figura nem a espelhá-la de lado: é uma operação própria.</p>
+    </div>
+    <div id="s1-challenge"></div>
+  </section>
+
+  <section class="part" aria-labelledby="s1-h3">
+    <h3 id="s1-h3">Hora de testar</h3>
+    <div id="s1-quiz"></div>
+  </section>
+
+  <details class="talk">
+    <summary>Para conversar em sala</summary>
+    <ul>
+      <li>Uma imagem de 8 × 8 pixels tem quantos números? E uma de 1920 × 1080?</li>
+      <li>Se a matriz tem 7 linhas e 5 colunas, quantas linhas e colunas tem a transposta?</li>
+      <li>Existe uma imagem que seja igual à própria transposta? Como ela é? (Esse tipo de matriz se chama <i>simétrica</i>.)</li>
+      <li>O que acontece se você transpuser duas vezes seguidas?</li>
+    </ul>
+  </details>
+
+  <div class="nextrow">
+    <span></span>
+    <button type="button" class="btn primary" data-go="next">Próxima seção: cores e soma</button>
+  </div>
+</article></div>
+</section>

@@ -1,0 +1,202 @@
+/* ==========================================================
+   Componentes compartilhados: matriz/imagem, equação, pergunta, comparador
+   ========================================================== */
+
+/* ---------- caixa de matriz (título + rótulos + grade) ---------- */
+.mbox {
+  --gap: 2px; --padx: 12px; --pady: 6px;
+  margin: 0;
+  display: grid;
+  gap: .3rem;
+  justify-items: start;
+  align-content: start;
+}
+.mbox.is-image { --gap: 0px; --padx: 0px; --pady: 0px; }
+.mcap { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 .55rem; font-weight: 700; font-size: 1rem; line-height: 1.3; }
+.mcap .dim { font: 500 .82rem var(--mono); color: var(--ink-3); }
+
+.mlab-wrap { display: grid; grid-template-columns: auto auto; align-items: start; }
+.collabs {
+  grid-column: 2;
+  display: grid; grid-template-columns: repeat(var(--cols), var(--cell)); gap: var(--gap);
+  padding-inline: var(--padx);
+  height: 1.45rem; align-items: end;
+}
+.rowlabs {
+  grid-column: 1; grid-row: 2;
+  display: grid; grid-auto-rows: var(--cell); gap: var(--gap);
+  padding-block: var(--pady); padding-right: .3rem;
+}
+.mslot { grid-column: 2; grid-row: 2; }
+.mlab {
+  display: grid; place-items: center;
+  min-width: 1.2rem;
+  border: 0; border-radius: 4px; background: transparent;
+  padding: 0 .1rem;
+  font: 500 .72rem/1 var(--mono); color: var(--ink-3);
+}
+button.mlab:hover { color: var(--ink); background: var(--marker-soft); }
+button.mlab[aria-pressed="true"] { background: var(--marker); color: var(--ink); font-weight: 700; }
+
+/* ---------- grade ---------- */
+.mxgrid {
+  --gap: 2px; --padx: 12px; --pady: 6px;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), var(--cell));
+  grid-auto-rows: var(--cell);
+  width: max-content;
+  user-select: none; -webkit-user-select: none;
+}
+.mxgrid.editable { touch-action: none; }
+.mxgrid.editable .c:not(.fixed) { cursor: pointer; }
+
+.mxgrid.matrix { gap: var(--gap); padding: var(--pady) var(--padx); }
+.mxgrid.matrix::before, .mxgrid.matrix::after {
+  content: ""; position: absolute; top: 0; bottom: 0; width: 9px;
+  border: 2.5px solid var(--ink); pointer-events: none;
+}
+.mxgrid.matrix::before { left: 0; border-right: 0; border-radius: 6px 0 0 6px; }
+.mxgrid.matrix::after  { right: 0; border-left: 0; border-radius: 0 6px 6px 0; }
+
+.mxgrid.image { --gap: 0px; --padx: 0px; --pady: 0px; gap: 0; border: 1.5px solid var(--ink); background: #000; }
+.mxgrid.image.lines { --gap: 1px; gap: 1px; background: #8791b8; }
+.mbox.is-image.lines { --gap: 1px; }
+
+.mxgrid .c {
+  position: relative;
+  display: grid; place-items: center;
+  min-width: 0; min-height: 0;
+  font: 500 calc(var(--cell) * .42)/1 var(--mono);
+  color: var(--ink);
+  background: #fff;
+}
+.mxgrid.matrix .c { border-radius: 3px; box-shadow: inset 0 0 0 1px var(--line); }
+.mxgrid.image .c { font-size: 0; }
+.mxgrid .c .v { pointer-events: none; }
+
+.mxgrid .c input.v {
+  pointer-events: auto;
+  width: 100%; height: 100%;
+  margin: 0; padding: 0;
+  border: 0; border-radius: inherit; background: transparent;
+  color: inherit; font: inherit; text-align: center;
+  user-select: text; -webkit-user-select: text;
+}
+.mxgrid .c input.v:focus-visible { outline: 3px solid var(--blue); outline-offset: -3px; }
+
+/* estados (vêm depois dos tipos para vencer em especificidade igual) */
+.mxgrid .c.hl { z-index: 4; box-shadow: inset 0 0 0 2px var(--marker), inset 0 0 0 4px var(--ink); }
+.mxgrid .c.pin { z-index: 5; box-shadow: inset 0 0 0 3px var(--marker), inset 0 0 0 5px var(--ink); }
+.mxgrid .c.win { z-index: 2; box-shadow: inset 0 0 0 2px var(--blue); }
+.mxgrid .c.win-c { z-index: 3; box-shadow: inset 0 0 0 3px var(--marker), inset 0 0 0 5px var(--ink); }
+.mxgrid .c.dim { opacity: .3; }
+.mxgrid .c.tint::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  background: var(--tint, var(--blue)); opacity: .55; pointer-events: none;
+}
+.mxgrid .c.sat-hi::before, .mxgrid .c.sat-lo::before {
+  content: ""; position: absolute; top: 2px; right: 2px; z-index: 2;
+  border: 4px solid transparent;
+  filter: drop-shadow(0 0 .6px var(--ink)) drop-shadow(0 0 .6px var(--ink));
+  pointer-events: none;
+}
+.mxgrid .c.sat-hi::before { border-top: 0; border-bottom: 7px solid var(--marker); }
+.mxgrid .c.sat-lo::before { border-bottom: 0; border-top: 7px solid #fff; }
+
+/* ---------- equação ---------- */
+.eq { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: center; gap: 1rem .8rem; }
+.eq > .op { align-self: center; font: 700 2.3rem/1 var(--sans); color: var(--ink-2); padding: 0 .1rem; }
+.eq.left { justify-content: flex-start; }
+
+/* ---------- pergunta ---------- */
+.quiz {
+  margin-top: 2.4rem;
+  padding: 1.2rem clamp(.9rem, 2.5vw, 1.6rem) 1.3rem;
+  background: var(--marker-soft);
+  border: 1.5px dashed var(--ink);
+  border-radius: 14px;
+}
+.quiz .q { font-size: 1.3rem; margin-bottom: .5rem; }
+.quiz .q-sub { margin: 0 0 .6rem; color: var(--ink-2); }
+.quiz .q-ctx { margin: .4rem 0 .9rem; display: flex; flex-wrap: wrap; gap: 1rem 1.6rem; align-items: center; }
+.quiz .opts {
+  display: grid; gap: .75rem;
+  grid-template-columns: repeat(auto-fit, minmax(var(--optw, 200px), 1fr));
+  margin: .9rem 0;
+}
+.quiz.list .opts { grid-template-columns: 1fr; }
+.opt {
+  display: flex; align-items: flex-start; gap: .7rem;
+  padding: .7rem .85rem;
+  text-align: left;
+  background: #fff;
+  border: 2px solid var(--ink-3);
+  border-radius: 12px;
+  color: var(--ink);
+  font: 400 1rem/1.45 var(--sans);
+  transition: box-shadow .12s, border-color .12s;
+}
+.opt:hover { border-color: var(--ink); box-shadow: 0 0 0 3px var(--marker); }
+.opt-k {
+  flex: 0 0 auto; display: grid; place-items: center;
+  width: 1.7rem; height: 1.7rem; border-radius: 50%;
+  border: 1.5px solid var(--ink); background: #fff;
+  font: 700 .9rem/1 var(--sans);
+}
+.opt-body { flex: 1 1 auto; min-width: 0; }
+.opt.vis { flex-direction: column; align-items: stretch; }
+.opt.vis .opt-body { display: grid; justify-items: center; align-content: start; gap: .35rem; }
+.opt-name { display: block; font-weight: 700; font-size: .88rem; line-height: 1.3; color: var(--ink-2); text-align: center; }
+.opt.list-item .opt-name { text-align: left; }
+.opt.correct { border-color: var(--ok); background: var(--ok-bg); }
+.opt.correct .opt-k { background: var(--ok); border-color: var(--ok); color: #fff; }
+.opt.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.opt.wrong .opt-k { background: var(--bad); border-color: var(--bad); color: #fff; }
+.opt.correct .opt-name { color: var(--ok); }
+.opt.wrong .opt-name { color: var(--bad); }
+
+.fb {
+  min-height: 3.4rem; max-width: none; margin: 0;
+  padding: .7rem .95rem;
+  background: #fff; border: 1.5px solid var(--line); border-radius: 10px;
+}
+.fb.ok { border-color: var(--ok); background: var(--ok-bg); }
+.fb.bad { border-color: var(--bad); background: var(--bad-bg); }
+.fb b:first-child { margin-right: .3rem; }
+.quiz-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .85rem; }
+
+/* ---------- comparador antes/depois ---------- */
+.cmp {
+  --pos: 50%;
+  position: relative;
+  width: 100%; max-width: 560px;
+  border: 1.5px solid var(--ink); border-radius: 8px; overflow: hidden;
+  background: #000;
+  user-select: none; -webkit-user-select: none;
+  touch-action: pan-y;
+  cursor: ew-resize;
+}
+.cmp canvas { display: block; width: 100%; height: auto; }
+.cmp canvas.crisp { image-rendering: pixelated; }
+.cmp .after { position: absolute; inset: 0; width: 100%; height: 100%; clip-path: inset(0 0 0 var(--pos)); }
+.cmp .handle { position: absolute; top: 0; bottom: 0; left: var(--pos); border-left: 3px solid var(--marker); filter: drop-shadow(0 0 2px rgba(0,0,0,.7)); pointer-events: none; }
+.cmp .knob {
+  position: absolute; top: 50%; left: var(--pos); transform: translate(-50%, -50%);
+  width: 2.3rem; height: 2.3rem; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--marker); border: 2px solid var(--ink);
+  font: 700 .85rem/1 var(--sans); color: var(--ink);
+  pointer-events: none;
+}
+.cmp .tl, .cmp .tr {
+  position: absolute; top: 8px; padding: .12rem .55rem; border-radius: 6px;
+  background: rgba(255,255,255,.92); color: var(--ink);
+  font: 700 .8rem/1.3 var(--sans); pointer-events: none;
+}
+.cmp .tl { left: 8px; }
+.cmp .tr { right: 8px; }
+
+/* ---------- barra horizontal simples ---------- */
+.bar { height: .85rem; background: var(--soft); border: 1.5px solid var(--ink-3); border-radius: 6px; overflow: hidden; }
+.bar > i { display: block; height: 100%; width: var(--w, 0%); background: var(--ink); transition: width .15s; }

@@ -1,0 +1,130 @@
+<section class="panel" id="secao-5" role="tabpanel" aria-labelledby="tab-5" tabindex="-1" hidden>
+<div class="wrap"><article class="sheet">
+  <h2>História: como as matrizes levaram à inteligência artificial</h2>
+  <p>Tudo o que você fez até aqui (trocar linhas por colunas, somar, subtrair, aplicar filtros) é matemática de matrizes. Esta seção é uma pequena aula de história sobre como essa mesma matemática foi parar dentro da <b>inteligência artificial</b> (IA). No caminho, você vai fazer um computador ler o seu desenho e mexer num tabuleiro de xadrez escrito em números.</p>
+  <div class="key">
+    <p><b>A ideia por trás de tudo</b></p>
+    <p>Um computador só entende números. Para ele, uma imagem, um tabuleiro de xadrez e até um texto são tabelas de números, ou seja, matrizes. Ensinar um computador a enxergar, a jogar ou a conversar é ensiná-lo a fazer contas com matrizes.</p>
+  </div>
+
+
+  <section class="part" aria-labelledby="s5-h2">
+    <h3 id="s5-h2">Anos 1990: a competição para ler dígitos</h3>
+    <p>Para uma pessoa, ler um número escrito à mão é fácil. Para um computador é difícil, porque cada pessoa escreve de um jeito. Nos anos 1990 isso virou um problema real: os Estados Unidos precisavam processar milhões de formulários do censo preenchidos à mão.</p>
+    <p>Em <b>1992</b>, o <b>NIST</b> (o instituto de padrões dos Estados Unidos) e o Censo organizaram um desafio aberto. Equipes receberam as mesmas imagens de caracteres escritos à mão, e seus programas tinham que dizer qual era cada um. Mais de 45 sistemas, de 26 organizações, entraram na disputa.</p>
+    <p>O que mais durou dessa época foram os <b>dados</b>. Pesquisadores, entre eles <b>Yann LeCun</b>, montaram, a partir de amostras do NIST, uma coleção de 70 mil imagens de dígitos, a <b>MNIST</b>. Cada imagem tem 28 × 28 pixels, isto é, é uma matriz com 784 números. Durante décadas, a MNIST foi o “teste padrão” de quem criava métodos para reconhecer imagens.</p>
+    <p>Aos poucos, a forma de resolver o problema mudou. Em vez de escrever regras à mão (“o 8 tem duas voltas”, “o 1 é um traço reto”), os métodos passaram a <b>aprender com muitos exemplos</b>: o programa começa com números chutados e corrige cada um deles quando erra. É a ideia que Turing e Rosenblatt já tinham.</p>
+
+    <h4>Faça você: um computador lendo dígitos</h4>
+    <p>O reconhecedor abaixo é uma versão minúscula dessa ideia. Ele aprendeu com dígitos reais, do conjunto <i>Optical Recognition of Handwritten Digits</i> (que usa programas do próprio NIST para preparar as imagens), e também com dígitos desenhados por programa. As imagens são bem menores que as da MNIST: 8 × 8 pixels. Desenhe um número de 0 a 9 e veja o que o computador enxerga e o que ele responde.</p>
+    <div id="s5-digits"></div>
+  </section>
+
+  <section class="part" aria-labelledby="s5-h3">
+    <h3 id="s5-h3">1997: o Deep Blue e o tabuleiro de xadrez</h3>
+    <p>Em <b>maio de 1997</b>, o <b>Deep Blue</b>, um supercomputador da IBM, venceu o campeão mundial de xadrez <b>Garry Kasparov</b> por 3½ a 2½, numa disputa de seis partidas. Foi a primeira vez que um computador derrotou um campeão mundial num confronto em condições normais de torneio. O Deep Blue examinava cerca de <b>200 milhões de posições por segundo</b>.</p>
+    <p>Ele, porém, não aprendia como o nosso reconhecedor de dígitos. Especialistas escreveram à mão as regras que davam uma <b>nota</b> a cada posição do tabuleiro (por exemplo, somar quanto valem as peças de cada lado), e a velocidade fazia o resto: testar milhões de jogadas e ficar com a de melhor nota.</p>
+    <p>E como o computador “vê” um tabuleiro? Do mesmo jeito que vê uma imagem: como uma <b>matriz 8 × 8</b>, em que cada casa guarda um número que diz qual peça está ali.</p>
+    <div id="s5-chess"></div>
+  </section>
+
+  <section class="part" aria-labelledby="s5-h4">
+    <h3 id="s5-h4">De 1998 até hoje: as máquinas aprendem os próprios números</h3>
+    <ol class="timeline">
+      <li>
+        <span class="yr">1998</span>
+        <div class="tl-body">
+          <h4>LeNet-5: filtros que o computador descobre</h4>
+          <p><b>Yann LeCun</b> e colegas apresentaram a <b>LeNet-5</b>, uma rede neural para ler dígitos. Ela usa <b>filtros</b> como os da seção 4, mas com uma diferença enorme: os números dos filtros não foram escolhidos por uma pessoa. O computador os descobriu treinando com os dígitos da MNIST. A LeNet-5 errava menos de 1% dos dígitos do teste, e sistemas desse tipo passaram a ler cheques em bancos dos Estados Unidos.</p>
+        </div>
+      </li>
+      <li>
+        <span class="yr">2012</span>
+        <div class="tl-body">
+          <h4>AlexNet: placas de vídeo e fotos coloridas</h4>
+          <p>Na competição <b>ImageNet</b>, que pede para reconhecer 1.000 tipos de objetos em fotos, uma rede chamada <b>AlexNet</b> abriu uma vantagem enorme: errou 15,3% das vezes, contra 26,2% do segundo colocado (valia acertar entre as 5 melhores respostas da rede). Ela tem cerca de <b>60 milhões de números</b> ajustáveis e foi treinada em placas de vídeo (GPUs), que são ótimas em multiplicar matrizes. A foto colorida entra como três matrizes, R, G e B, como na seção 2.</p>
+        </div>
+      </li>
+      <li>
+        <span class="yr">2016</span>
+        <div class="tl-body">
+          <h4>AlphaGo: outro tabuleiro, outra matriz</h4>
+          <p>O programa <b>AlphaGo</b>, da empresa DeepMind, venceu o campeão <b>Lee Sedol</b> por 4 a 1 no <b>Go</b>, um jogo de tabuleiro bem mais difícil para computadores que o xadrez. O tabuleiro do Go é uma matriz de 19 × 19 casas. Ao contrário do Deep Blue, o AlphaGo <b>aprendeu</b>: estudou muitas partidas de jogadores humanos e depois treinou jogando contra si mesmo.</p>
+          <div id="s5-go"></div>
+        </div>
+      </li>
+      <li>
+        <span class="yr">2017–hoje</span>
+        <div class="tl-body">
+          <h4>Transformers: o texto também vira matriz</h4>
+          <p>Em 2017 foi apresentada uma nova arquitetura de rede, o <b>Transformer</b>, que está por trás dos modelos de linguagem usados hoje em assistentes de conversa, como ChatGPT, Claude e Gemini. Nesses modelos, o que entra não é uma imagem, e sim um texto: cada palavra (ou pedaço de palavra) é trocada por uma lista de números, e o texto inteiro vira uma matriz. Por dentro, o modelo faz uma quantidade gigantesca de multiplicações de matrizes, com bilhões de números ajustados no treino.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="key">
+      <p><b>As IAs de hoje são, na verdade, matrizes</b></p>
+      <p>Por dentro de uma IA moderna não existem regras escritas em palavras, como “se tem duas voltas, é um 8”. Existem <b>matrizes enormes de números</b>, ajustados a partir de exemplos, e as contas são multiplicar e somar. Foi exatamente isso que o reconhecedor de dígitos fez. O que mudou desde Turing e Rosenblatt foi o tamanho: mais dados, computadores mais rápidos e matrizes bem maiores.</p>
+    </div>
+
+    <h4>Quantos números tem cada programa?</h4>
+    <p>Os números que o computador ajusta durante o treino (os especialistas os chamam de <i>parâmetros</i>) ficam guardados em matrizes. Compare os tamanhos:</p>
+    <div class="tbl-wrap">
+      <table class="sizes">
+        <caption>Quantos números cada programa recebe e quantos ele ajusta no treino</caption>
+        <thead>
+          <tr><th scope="col">Programa</th><th scope="col">Entrada</th><th scope="col">Números ajustáveis</th><th scope="col"><span class="sr-only">Tamanho, em escala logarítmica</span></th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Reconhecedor desta página</th><td>8 × 8 = 64 números</td><td>650</td><td aria-hidden="true"><span class="bar"><i style="--w:28%"></i></span></td></tr>
+          <tr><th scope="row">LeNet-5 (1998)</th><td>32 × 32 = 1.024 números</td><td>cerca de 60 mil</td><td aria-hidden="true"><span class="bar"><i style="--w:48%"></i></span></td></tr>
+          <tr><th scope="row">AlexNet (2012)</th><td>224 × 224 × 3 = 150.528 números</td><td>cerca de 60 milhões</td><td aria-hidden="true"><span class="bar"><i style="--w:78%"></i></span></td></tr>
+          <tr><th scope="row">Modelos de linguagem de hoje</th><td>texto, trocado por números</td><td>bilhões</td><td aria-hidden="true"><span class="bar"><i style="--w:100%"></i></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small muted">As barras usam escala logarítmica (cada marca multiplica o tamanho por 10). Sem isso, a barra do nosso reconhecedor seria invisível ao lado das outras.</p>
+
+    <h4>O que você praticou nas outras seções aparece dentro da IA</h4>
+    <ul class="recap">
+      <li><b>Imagem como matriz (seção 1).</b> O reconhecedor recebe 64 números, e a LeNet-5 recebe 1.024. A transposta também aparece: um modelo de linguagem a usa nas contas que relacionam as palavras de uma frase.</li>
+      <li><b>Soma (seção 2).</b> A nota de cada dígito é uma soma de 64 produtos mais um número fixo.</li>
+      <li><b>Subtração (seção 3).</b> Para treinar, o computador subtrai a resposta que deu da resposta certa e ajusta os números para essa diferença (o erro) diminuir.</li>
+      <li><b>Filtros (seção 4).</b> São a base das redes que enxergam, como a LeNet-5 e a AlexNet. A diferença é que os números do filtro são aprendidos, não escolhidos.</li>
+    </ul>
+  </section>
+
+  <section class="part" aria-labelledby="s5-h5">
+    <h3 id="s5-h5">Hora de testar</h3>
+    <div id="s5-quiz"></div>
+  </section>
+
+  <section class="part" aria-labelledby="s5-h6">
+    <h3 id="s5-h6">Para saber mais</h3>
+    <p class="small muted">Os links abrem em outra aba. A maior parte do material está em inglês.</p>
+    <ul class="links">
+      <li><a href="https://doi.org/10.1093/mind/LIX.236.433" target="_blank" rel="noopener noreferrer">Alan Turing, “Computing Machinery and Intelligence” (1950)</a>: o artigo original do jogo da imitação.</li>
+      <li><a href="https://pt.wikipedia.org/wiki/Teste_de_Turing" target="_blank" rel="noopener noreferrer">Teste de Turing</a>: verbete da Wikipédia, em português.</li>
+      <li><a href="https://nvlpubs.nist.gov/nistpubs/Legacy/IR/nistir4912.pdf" target="_blank" rel="noopener noreferrer">The First Census Optical Character Recognition Systems Conference</a>: relatório do NIST sobre a competição de 1992.</li>
+      <li><a href="https://archive.ics.uci.edu/dataset/80/optical+recognition+of+handwritten+digits" target="_blank" rel="noopener noreferrer">Optical Recognition of Handwritten Digits</a>: os dados usados no reconhecedor desta página.</li>
+      <li><a href="https://www.ibm.com/history/deep-blue" target="_blank" rel="noopener noreferrer">Deep Blue</a>: a história contada pela IBM.</li>
+    </ul>
+  </section>
+
+  <details class="talk">
+    <summary>Para conversar em sala</summary>
+    <ul>
+      <li>Turing sugeriu construir uma máquina que aprende, como uma criança. No reconhecedor de dígitos, quem escolheu os 640 números dos moldes: uma pessoa ou o computador?</li>
+      <li>Por que o reconhecedor erra mais nos desenhos feitos com o mouse do que nos dígitos de teste? O que aconteceria se ele só tivesse visto dígitos escritos por uma única pessoa?</li>
+      <li>O Deep Blue seguia regras escritas por pessoas. O AlphaGo aprendeu com exemplos e jogando contra si mesmo. Que vantagens e desvantagens tem cada jeito?</li>
+      <li>No tabuleiro, o que acontece quando você multiplica a matriz por −1? E quando calcula a transposta? Relacione com as seções 1 e 3.</li>
+      <li>Uma foto colorida de 224 × 224 pixels tem quantos números? (Lembre dos três canais da seção 2.)</li>
+      <li>Se uma IA aprende com exemplos, o que acontece quando os exemplos mostram só um tipo de pessoa ou de situação? Quem deveria conferir isso?</li>
+    </ul>
+  </details>
+
+  <div class="nextrow">
+    <button type="button" class="btn" data-go="prev">Voltar: filtros</button>
+  </div>
+</article></div>
+</section>

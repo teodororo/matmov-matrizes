@@ -1,0 +1,52 @@
+<section class="panel" id="secao-3" role="tabpanel" aria-labelledby="tab-3" tabindex="-1" hidden>
+<div class="wrap"><article class="sheet">
+  <h2>Subtração: o negativo da imagem</h2>
+  <p>Nos filmes fotográficos antigos, o <b>negativo</b> mostrava o claro como escuro e o escuro como claro. Com matrizes, isso é uma <b>subtração</b>: o negativo de cada pixel é o valor máximo menos o valor do pixel.</p>
+  <div class="key">
+    <p>Numa imagem com valores de 0 a 255: <b><i>N</i> = 255 − <i>A</i></b>, pixel por pixel. Em forma de matrizes: <b><i>N</i> = <i>J</i> − <i>A</i></b>, em que <i>J</i> é a matriz que tem 255 em todas as posições (ou 1, numa imagem só de preto e branco).</p>
+  </div>
+
+  <section class="part" aria-labelledby="s3-h1">
+    <h3 id="s3-h1">Primeiro, em preto e branco</h3>
+    <p>Aqui <i>J</i> só tem 1. Onde a imagem <i>A</i> é preta (0), o negativo <i>N</i> é branco (1), porque 1 − 0 = 1. Onde <i>A</i> é branca (1), <i>N</i> é preto, porque 1 − 1 = 0. Clique em qualquer pixel para mudar <i>A</i> e veja <i>N</i> se atualizar.</p>
+    <div id="s3-bw"></div>
+  </section>
+
+  <section class="part" aria-labelledby="s3-h2">
+    <h3 id="s3-h2">Tons de cinza: 255 menos o valor</h3>
+    <p>Com tons de cinza, cada pixel vai de 0 (preto) a 255 (branco). Mova o controle e veja que o negativo <b>inverte a escala</b>: um cinza escuro vira um cinza claro na mesma distância do outro extremo, e o cinza do meio quase não muda.</p>
+    <div id="s3-px"></div>
+    <p>Agora com uma imagem inteira de 8 × 8. Digite outros números nos pixels de <i>A</i> (de 0 a 255) para testar.</p>
+    <div id="s3-gray"></div>
+  </section>
+
+  <section class="part" aria-labelledby="s3-h3">
+    <h3 id="s3-h3">Numa foto colorida</h3>
+    <p>Numa imagem colorida a conta é feita <b>em cada um dos três canais</b>: R, G e B viram 255 − R, 255 − G e 255 − B. Passe o mouse sobre a foto para ver os números de um pixel, antes e depois. Você também pode inverter só um canal ou aplicar o negativo duas vezes.</p>
+    <div id="s3-photo"></div>
+    <div class="note">
+      <p>O negativo de um vermelho puro (255, 0, 0) é (0, 255, 255), um azul-esverdeado chamado <b>ciano</b>. Cada cor vira a sua &ldquo;oposta&rdquo;. É por isso que o céu azul de uma foto fica alaranjado no negativo.</p>
+    </div>
+  </section>
+
+  <section class="part" aria-labelledby="s3-h4">
+    <h3 id="s3-h4">Hora de testar</h3>
+    <div id="s3-quiz"></div>
+  </section>
+
+  <details class="talk">
+    <summary>Para conversar em sala</summary>
+    <ul>
+      <li>Por que o negativo de um pixel branco é preto? E o de um pixel preto?</li>
+      <li>Qual pixel quase não muda no negativo? (Pense em 127 e 128.)</li>
+      <li>O que muda na fórmula se a imagem usar valores de 0 a 1 em vez de 0 a 255?</li>
+      <li>Em que situações o negativo ajuda? (Por exemplo, para enxergar detalhes escuros numa radiografia.)</li>
+    </ul>
+  </details>
+
+  <div class="nextrow">
+    <button type="button" class="btn" data-go="prev">Voltar: cores e soma</button>
+    <button type="button" class="btn primary" data-go="next">Próxima seção: filtros</button>
+  </div>
+</article></div>
+</section>

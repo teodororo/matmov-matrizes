@@ -1,0 +1,56 @@
+<section class="panel" id="secao-4" role="tabpanel" aria-labelledby="tab-4" tabindex="-1" hidden>
+<div class="wrap"><article class="sheet">
+  <h2>Filtros: uma matriz que transforma qualquer imagem</h2>
+  <p>Somar e subtrair mexe em cada pixel isoladamente. Um <b>filtro</b> faz mais: para calcular o novo valor de um pixel, ele também olha os <b>vizinhos</b>. O filtro é uma pequena matriz de números (aqui, 3 × 3) que desliza pela imagem inteira. Como é só uma tabela de números, <b>o mesmo filtro funciona em qualquer imagem</b> e sempre produz o mesmo tipo de efeito.</p>
+  <div class="key">
+    <p><b>Como o filtro calcula um pixel</b></p>
+    <ol class="steps">
+      <li>Coloque o centro do filtro sobre o pixel.</li>
+      <li>Multiplique cada número do filtro pelo pixel que está embaixo dele.</li>
+      <li>Some os 9 resultados.</li>
+      <li>Divida pelo divisor e some o deslocamento, se houver.</li>
+      <li>Esse é o novo valor do pixel. Repita para todos os pixels da imagem.</li>
+    </ol>
+  </div>
+
+  <section class="part" aria-labelledby="s4-h1">
+    <h3 id="s4-h1">Um pixel por vez</h3>
+    <p>Passe o mouse (ou toque) em um pixel da imagem de entrada: as 9 posições que o filtro enxerga ficam marcadas e o cálculo aparece logo abaixo. Escolha outros filtros, mude os números e veja a imagem de saída mudar. Você também pode digitar outros valores nos pixels da entrada. Nas bordas, o computador repete o pixel mais próximo para completar a vizinhança.</p>
+    <div id="s4-inspector"></div>
+
+    <h4>Desafios: invente o filtro</h4>
+    <p>Mude os números do filtro de cima até conseguir cada efeito. A conferência é feita em uma imagem de teste, então o filtro que você inventar vale para qualquer imagem.</p>
+    <div id="s4-challenges"></div>
+  </section>
+
+  <section class="part" aria-labelledby="s4-h2">
+    <h3 id="s4-h2">O mesmo filtro, qualquer imagem</h3>
+    <p>Agora o filtro atua numa imagem inteira. Troque de imagem: o efeito é o mesmo, porque o filtro é só uma matriz de números. Se quiser, use uma foto sua (ela não sai do seu aparelho).</p>
+    <div id="s4-photo"></div>
+
+    <h4>Receitas para inventar filtros</h4>
+    <p>Quase todo filtro segue uma destas ideias. O botão carrega o exemplo no filtro, e a foto de cima muda na hora.</p>
+    <div id="s4-recipes"></div>
+  </section>
+
+  <section class="part" aria-labelledby="s4-h3">
+    <h3 id="s4-h3">Hora de testar</h3>
+    <div id="s4-quiz"></div>
+  </section>
+
+  <details class="talk">
+    <summary>Para conversar em sala</summary>
+    <ul>
+      <li>Por que o filtro de desfoque divide por 9? O que aconteceria se não dividisse?</li>
+      <li>Num filtro de bordas, os números somam 0. Por que a parte lisa da imagem fica preta?</li>
+      <li>Uma foto de 1920 × 1080 tem mais de 2 milhões de pixels. Quantas multiplicações um filtro 3 × 3 faz em cada canal de cor dessa foto?</li>
+      <li>Redes neurais de reconhecimento de imagens usam filtros como esses, mas os números do filtro são descobertos pelo próprio computador, treinando com muitos exemplos. Isso aparece na próxima seção.</li>
+    </ul>
+  </details>
+
+  <div class="nextrow">
+    <button type="button" class="btn" data-go="prev">Voltar: subtração e negativo</button>
+    <button type="button" class="btn primary" data-go="next">Próxima seção: história e IA</button>
+  </div>
+</article></div>
+</section>

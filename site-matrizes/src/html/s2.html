@@ -1,0 +1,45 @@
+<section class="panel" id="secao-2" role="tabpanel" aria-labelledby="tab-2" tabindex="-1" hidden>
+<div class="wrap"><article class="sheet">
+  <h2>Cores: três matrizes somadas</h2>
+  <p>Numa imagem colorida, cada pixel guarda <b>três números</b> de 0 a 255: quanto ele tem de luz <b class="tag-r">vermelha</b> (R, de <i>red</i>), de luz <b class="tag-g">verde</b> (G, de <i>green</i>) e de luz <b class="tag-b">azul</b> (B, de <i>blue</i>). Por isso uma imagem colorida é feita de <b>três matrizes</b>, uma para cada canal de cor. Somando a luz dos três canais, pixel por pixel, aparece a cor que você vê.</p>
+  <div class="key">
+    <p><b>0</b> é nenhuma luz daquele canal e <b>255</b> é luz no máximo. Exemplos: (255, 0, 0) é vermelho puro, (255, 255, 255) é branco e (0, 0, 0) é preto.</p>
+  </div>
+
+  <section class="part" aria-labelledby="s2-h1">
+    <h3 id="s2-h1">Separe os canais e some de novo</h3>
+    <p>A imagem colorida abaixo está separada em três matrizes: uma de vermelho, uma de verde e uma de azul. Quanto mais forte o quadradinho, maior o número. Somando os três canais, pixel por pixel, você volta à imagem colorida.</p>
+    <p><b>Brinque:</b> escolha um pincel e <b>pinte a imagem final</b> para ver como os números de cada canal mudam. Ou escolha <b>Números</b> e digite valores de 0 a 255 direto nas matrizes. Desligue um canal para ver o que ele faz.</p>
+    <div id="s2-lab"></div>
+    <div class="note">
+      <p>Aqui se mistura <b>luz</b>, não tinta. Vermelho mais verde dá <b>amarelo</b>, e os três no máximo dão <b>branco</b>. A tela do seu celular faz todas as cores usando só esses três tipos de luz, em pontinhos minúsculos.</p>
+    </div>
+  </section>
+
+  <section class="part" aria-labelledby="s2-h2">
+    <h3 id="s2-h2">Somar um número: mais luz ou menos luz</h3>
+    <p>O que acontece se somarmos o <b>mesmo número <i>k</i></b> a todos os valores das matrizes? Mexa no controle. Um <i>k</i> negativo equivale a subtrair. Como cada canal só vai de 0 a 255, quando a conta passa de 255 o resultado é <b>cortado</b> em 255 (e o que ficaria abaixo de 0 vira 0).</p>
+    <div id="s2-bright"></div>
+  </section>
+
+  <section class="part" aria-labelledby="s2-h3">
+    <h3 id="s2-h3">Hora de testar</h3>
+    <div id="s2-quiz"></div>
+  </section>
+
+  <details class="talk">
+    <summary>Para conversar em sala</summary>
+    <ul>
+      <li>Quantas cores diferentes um pixel pode ter? (Dica: são 256 valores possíveis em cada um dos três canais.)</li>
+      <li>Uma foto de 1920 × 1080 pixels tem quantos números no total?</li>
+      <li>Por que misturar luz vermelha e verde dá amarelo, se misturar tinta azul e amarela dá verde?</li>
+      <li>Se você somar um número grande a uma foto que já é clara, o que acontece com os detalhes das partes mais claras?</li>
+    </ul>
+  </details>
+
+  <div class="nextrow">
+    <button type="button" class="btn" data-go="prev">Voltar: pixels e transposta</button>
+    <button type="button" class="btn primary" data-go="next">Próxima seção: subtração e negativo</button>
+  </div>
+</article></div>
+</section>
