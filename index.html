@@ -812,7 +812,6 @@ table.sizes { width: 100%; min-width: 600px; border-collapse: collapse; font-siz
     <div class="note">
       <p>Repare que os pixels da <b>diagonal</b> (do canto de cima à esquerda até o canto de baixo à direita) ficam onde estavam. A transposta é um <b>espelho em relação à diagonal</b>. Por isso ela não é igual a girar a figura nem a espelhá-la de lado: é uma operação própria.</p>
     </div>
-    <div id="s1-challenge"></div>
   </section>
 
   <section class="part" aria-labelledby="s1-h3">
@@ -829,6 +828,12 @@ table.sizes { width: 100%; min-width: 600px; border-collapse: collapse; font-siz
       <li>O que acontece se você transpuser duas vezes seguidas?</li>
     </ul>
   </details>
+
+  <section class="part" aria-labelledby="s1-h4">
+    <h3 id="s1-h4">Playground: transponha quantas vezes quiser</h3>
+    <p>Edite a matriz se quiser e clique em <b>Transpor de novo</b> repetidamente. Repare no título da caixa, que mostra as dimensões, e tente descobrir o padrão antes de ler a mensagem abaixo da matriz.</p>
+    <div id="s1-playground"></div>
+  </section>
 
   <div class="nextrow">
     <span></span>
@@ -2216,7 +2221,7 @@ window.ART = {"bits":[{"id":"casa","name":"Casinha","rows":["00000100","00000100
     const labHost = $('#s1-lab', panel);
     const numHost = $('#s1-num', panel);
     const trHost = $('#s1-transp', panel);
-    const chHost = $('#s1-challenge', panel);
+    const pgHost = $('#s1-playground', panel);
     const quizHost = $('#s1-quiz', panel);
 
     /* ---------- estado compartilhado: a imagem A ---------- */
@@ -2228,10 +2233,12 @@ window.ART = {"bits":[{"id":"casa","name":"Casinha","rows":["00000100","00000100
       st.A[i][j] = v;
       renderAll();
     };
+    let pg = null; // estado independente do playground de transposições repetidas
     function loadArt(id) {
       st.id = id;
       st.orig = bitsFromRows(entryOf(id).rows);
       st.A = Mx.clone(st.orig);
+      pg = null;
     }
     loadArt(st.id);
 
@@ -2379,35 +2386,59 @@ window.ART = {"bits":[{"id":"casa","name":"Casinha","rows":["00000100","00000100
       render();
     }
 
-    /* ---------- desafio: A igual à transposta ---------- */
-    function buildChallenge() {
-      chHost.replaceChildren();
-      st.renders = st.renders.filter((f) => !f.ch);
+    /* ---------- 1.3 playground: transpor várias vezes seguidas ---------- */
+    function buildPlayground() {
+      pgHost.replaceChildren();
+      st.renders = st.renders.filter((f) => !f.pg);
+      if (!pg) pg = { base: Mx.clone(st.A), M: Mx.clone(st.A), count: 0 };
+
+      const matStage = h('div', { class: 'stage' });
       const chip = h('span', { class: 'status', role: 'status', 'aria-live': 'polite' });
-      chHost.append(h('div', { class: 'challenge' },
-        h('h4', null, 'Desafio'),
-        h('p', null, 'Edite a imagem até que ela fique ', h('b', null, 'igual à própria transposta'), ' (', h('i', null, 'A = A'), h('sup', null, 'T'), '). Dica: o que está de um lado da diagonal precisa ser o espelho do que está do outro lado.'),
-        chip));
+      const bTranspose = h('button', { type: 'button', class: 'btn primary', onclick: () => { pg.M = Mx.transpose(pg.M); pg.count++; render(); } }, 'Transpor de novo');
+      const bReset = h('button', { type: 'button', class: 'btn', onclick: () => { pg.M = Mx.clone(pg.base); pg.count = 0; render(); } }, 'Voltar ao início');
+
+      // a matriz é reconstruída a cada transposição porque, se não for quadrada, linhas e colunas trocam de tamanho
+      const renderMatrix = () => {
+        matStage.replaceChildren();
+        const rows = pg.M.length, cols = pg.M[0].length;
+        const cell = cellFor(pgHost, Math.max(rows, cols), { max: 38, extra: 60 });
+        const setCell = (i, j, v) => {
+          if (pg.M[i][j] === v) return;
+          pg.M[i][j] = v;
+          pg.base = Mx.clone(pg.M);
+          pg.count = 0;
+          render();
+        };
+        let paint = 1;
+        const down = (i, j) => { paint = 1 - pg.M[i][j]; setCell(i, j, paint); };
+        const move = (i, j) => setCell(i, j, paint);
+        const g = Grid({ rows, cols, kind: 'matrix', cell, editable: true, onClick: down, onDrag: move, aria: 'Matriz que você pode editar e transpor repetidamente.' });
+        g.paint((i, j) => BW(pg.M[i][j]));
+        bindDigitKeys(g, setCell);
+        const box = matrixBox(g, { title: 'Matriz', rowLabels: true, colLabels: true });
+        matStage.append(box.root);
+      };
+
       const render = () => {
-        const rows = st.A.length, cols = st.A[0].length;
+        renderMatrix();
+        bReset.disabled = pg.count === 0;
         chip.className = 'status';
-        if (rows !== cols) {
-          chip.textContent = `Este desenho tem ${rows} linhas e ${cols} colunas, então a transposta tem ${cols} linhas e ${rows} colunas: nunca seria igual a ele. Escolha um desenho 8 × 8 lá em cima.`;
-          return;
-        }
-        let diff = 0, white = 0;
-        for (let i = 0; i < rows; i++) for (let j = 0; j < cols; j++) { white += st.A[i][j]; if (j > i && st.A[i][j] !== st.A[j][i]) diff++; }
-        if (diff === 0 && (white < 6 || rows * cols - white < 6)) {
-          chip.textContent = 'Essa imagem é igual à transposta, mas é lisa demais para valer. Desenhe alguma coisa: pelo menos 6 pixels brancos e 6 pretos.';
-        } else if (diff === 0) {
+        if (pg.count === 0) {
+          chip.textContent = 'Ainda não transpôs nenhuma vez.';
+        } else if (pg.count % 2 === 0) {
           chip.classList.add('done');
-          chip.textContent = 'Conseguiu! A matriz é igual à sua transposta. Matrizes assim se chamam simétricas.';
+          chip.textContent = `Transpôs ${pg.count} vezes: como é um número par, voltou a ser exatamente a matriz do início!`;
         } else {
-          chip.textContent = `Ainda não: faltam ${diff} ${diff === 1 ? 'par de pixels' : 'pares de pixels'} a acertar.`;
+          chip.textContent = `Transpôs ${pg.count} ${pg.count === 1 ? 'vez' : 'vezes'}: como é um número ímpar, essa é a transposta da matriz do início.`;
         }
       };
-      render.ch = true;
+      render.pg = true;
       st.renders.push(render);
+
+      pgHost.append(h('div', { class: 'lab' },
+        h('div', { class: 'lab-bar' }, bTranspose, bReset),
+        matStage,
+        chip));
       render();
     }
 
@@ -2448,7 +2479,7 @@ window.ART = {"bits":[{"id":"casa","name":"Casinha","rows":["00000100","00000100
 
     /* ---------- montagem ---------- */
     function rebuildAll() {
-      buildLab(); buildTransp(); buildChallenge();
+      buildLab(); buildTransp(); buildPlayground();
       st.renders.forEach((f) => f());
     }
     buildNumbers();
